@@ -1,0 +1,30 @@
+<ng-container [formGroup]="parentForm">
+  <ng-container formArrayName="participantsPhysical">
+    <ng-container [formGroupName]="indexParticipant">
+      <hr>
+      <h2>Новый физический клиент</h2>
+      <div class="container">
+        <app-name-form [parentForm]="parentForm" [indexParticipant]="indexParticipant"></app-name-form>
+        <!--        TODO: Сейчас нет ограничения на максимальное количество адресов. Верстка на это не рассчитана (плывет телефон)-->
+        <ng-container formArrayName="address" *ngFor="let item of address.controls; index as indexAddress">
+          <app-address-physical-form [parentForm]="parentForm" [indexParticipant]="indexParticipant"
+                                     [indexAddress]="indexAddress"></app-address-physical-form>
+        </ng-container>
+<!--        TODO: Судя бы я воткнул ngx-mask, но это лишняя библиотека. Тем не менее она полностью решает проблему валидации -->
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Телефон</mat-label>
+          <span matPrefix>+7 &nbsp;</span>
+          <input type="tel" matInput placeholder="999-999-99-99" formControlName="phone">
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" class="add-address"
+              (click)="addAddress()">Добавить новый адрес
+      </button>
+
+      <button class="remove-participant" mat-icon-button color="warn" matTooltip="Удалить участника"
+              (click)="removeParticipant()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </ng-container>
+  </ng-container>
+</ng-container>

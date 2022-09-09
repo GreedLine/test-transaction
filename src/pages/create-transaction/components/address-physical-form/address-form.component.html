@@ -1,0 +1,40 @@
+<ng-container [formGroup]="parentForm">
+  <ng-container formArrayName="participantsPhysical">
+    <ng-container [formGroupName]="indexParticipant">
+      <ng-container formArrayName="address">
+        <ng-container [formGroupName]="indexAddress">
+
+          <div class="container">
+            <div class="card">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Страна</mat-label>
+                <input matInput formControlName="country">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Город</mat-label>
+                <input matInput formControlName="city">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Район</mat-label>
+                <input matInput formControlName="area">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Улица</mat-label>
+                <input matInput formControlName="street">
+              </mat-form-field>
+            </div>
+
+            <button class="remove-address" mat-icon-button color="warn" matTooltip="Удалить адрес" *ngIf="indexAddress"
+                    (click)="removeAddress()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>

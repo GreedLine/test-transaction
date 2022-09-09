@@ -1,0 +1,23 @@
+<ng-container [formGroup]="parentForm">
+  <ng-container formArrayName="participantsJuridical">
+    <ng-container [formGroupName]="indexJuridical">
+      <hr>
+      <h2>Новый юридический клиент</h2>
+      <div class="container">
+        <app-name-company-form [parentForm]="parentForm" [indexParticipant]="indexJuridical"></app-name-company-form>
+        <ng-container formArrayName="address" *ngFor="let item of address.controls; index as indexAddress">
+          <app-address-juridical-form [parentForm]="parentForm" [indexParticipant]="indexJuridical"
+                            [indexAddress]="indexAddress"></app-address-juridical-form>
+        </ng-container>
+      </div>
+      <button mat-raised-button color="primary" class="add-address"
+              (click)="addAddress()">Добавить новый адрес
+      </button>
+
+      <button class="remove-participant" mat-icon-button color="warn" matTooltip="Удалить участника"
+              (click)="removeParticipant()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </ng-container>
+  </ng-container>
+</ng-container>

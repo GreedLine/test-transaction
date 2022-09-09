@@ -1,0 +1,31 @@
+<ng-container [formGroup]="parentForm">
+  <ng-container formArrayName="deals">
+    <ng-container [formGroupName]="indexDeal">
+      <div class="container">
+        <div class="card">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Номер сделки</mat-label>
+            <input matInput formControlName="id">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Что купили</mat-label>
+            <input matInput formControlName="data">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Выберите дату</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date">
+            <mat-hint>ММ/ДД/ГГГГ</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <button class="remove-address" mat-icon-button color="warn" matTooltip="Удалить сделку" *ngIf="indexDeal"
+                (click)="removeDeal()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>

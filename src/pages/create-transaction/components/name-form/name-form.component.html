@@ -1,0 +1,22 @@
+<ng-container [formGroup]="parentForm">
+  <ng-container formArrayName="participantsPhysical">
+    <ng-container [formGroupName]="indexParticipant">
+      <ng-container formGroupName="name">
+        <div class="card">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Фамилия</mat-label>
+            <input matInput formControlName="middleName">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Имя</mat-label>
+            <input matInput formControlName="firstName">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Отчество</mat-label>
+            <input matInput formControlName="lastName">
+          </mat-form-field>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>

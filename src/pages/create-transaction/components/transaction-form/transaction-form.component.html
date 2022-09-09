@@ -1,0 +1,53 @@
+
+<!-- TODO: Пример работы формы и модели для отправки на сервер. Её можно модернизировать, но это все делается по-->
+<!-- Предпочтениям бекенда и в связке с ним. Сейчас слишком мало данных -->
+<!-- Отдельный косяк - это верстка. Не задавался какой-либо целью её делать -->
+<!-- Кроме как плюс-минус нормального визуала, что бы глаза не болели -->
+{{transactionForm.value | json}}
+
+
+<h4>Тип участника</h4>
+<form [formGroup]="transactionForm">
+  <div class="mat-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Выберите тип участника</mat-label>
+      <mat-select formControlName="participantType">
+        <mat-option [value]="option.value"
+                    *ngFor="let option of participantsTypesList">{{ option.viewValue }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" *ngIf="transactionForm.controls['participantType'].value"
+            (click)="addParticipant()">Добавить
+    </button>
+  </div>
+
+  <h1>Физические клиенты</h1>
+  <ng-container formArrayName="participantsPhysical"
+                *ngFor="let participantPhysical of participantsPhysical.controls; index as index">
+    <app-physical-form [parentForm]="transactionForm" [indexParticipant]="index"></app-physical-form>
+  </ng-container>
+
+  <hr>
+
+  <h1>Юридические клиенты</h1>
+  <ng-container formArrayName="participantsJuridical"
+                *ngFor="let participantJuridical of participantsJuridical.controls; index as index">
+    <app-juridical-form [parentForm]="transactionForm" [indexJuridical]="index"></app-juridical-form>
+  </ng-container>
+
+  <ng-container *ngIf="participantsPhysical.length || participantsJuridical.length">
+    <hr>
+    <div class="mat-container">
+      <h1>Список сделок</h1>
+      <button mat-raised-button color="primary"
+              (click)="addDeal()">Добавить
+      </button>
+    </div>
+    <div class="deals-container">
+      <ng-container formArrayName="deals"
+                    *ngFor="let deal of deals.controls; index as indexDeal">
+        <app-deal-form [parentForm]="transactionForm" [indexDeal]="indexDeal"></app-deal-form>
+      </ng-container>
+    </div>
+  </ng-container>
+</form>
